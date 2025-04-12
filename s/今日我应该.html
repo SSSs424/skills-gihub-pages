@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>今天我应该...？</title>
+    <style>
+        /* CSS 样式 */
+        body {
+            font-family: '微软雅黑', sans-serif;
+            background: #f0f7ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        #suggestion {
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            min-height: 60px;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        /* 动画效果 */
+        @keyframes flip {
+            from { transform: rotateX(0); }
+            to { transform: rotateX(360deg); }
+        }
+
+        .flip-animation {
+            animation: flip 0.6s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 今天我应该...</h1>
+        <div id="suggestion">点击按钮获取今日任务！</div>
+        <button onclick="generateSuggestion()">给我灵感！</button>
+    </div>
+
+    <script>
+        // 建议数据库（可自由扩展）
+        const suggestions = [
+            { text: "给十年后的自己写一封信", category: "自我反思" },
+            { text: "尝试用非惯用手刷牙", category: "挑战自我" },
+            { text: "学习一句新的方言", category: "学习成长" },
+            { text: "给陌生人一个真诚的赞美", category: "社交互动"},
+            { text: "记录今天的三件小确幸", category: "心理健康"},
+            { text: "去从未去过的公园散步", category: "探索冒险"}
+        ];
+
+        // 生成随机建议
+        function generateSuggestion() {
+            const suggestionBox = document.getElementById("suggestion");
+            const randomIndex = Math.floor(Math.random() * suggestions.length);
+            
+            // 添加动画
+            suggestionBox.classList.add("flip-animation");
+            
+            // 0.3秒后更新内容（配合动画时长）
+            setTimeout(() => {
+                suggestionBox.textContent = suggestions[randomIndex].text;
+                suggestionBox.classList.remove("flip-animation");
+            }, 300);
+        }
+    </script>
+</body>
+</html>
